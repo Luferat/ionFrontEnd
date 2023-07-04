@@ -1,18 +1,52 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { Auth, User, authState } from '@angular/fire/auth';
+import { Subscription } from 'rxjs';
+import { environment } from 'src/environments/environment';
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
+
+  public env = environment;
+
   public appPages = [
-    { title: 'Inbox', url: '/folder/inbox', icon: 'mail' },
-    { title: 'Outbox', url: '/folder/outbox', icon: 'paper-plane' },
-    { title: 'Favorites', url: '/folder/favorites', icon: 'heart' },
-    { title: 'Archived', url: '/folder/archived', icon: 'archive' },
-    { title: 'Trash', url: '/folder/trash', icon: 'trash' },
-    { title: 'Spam', url: '/folder/spam', icon: 'warning' },
+    { title: 'Início', url: '/home', icon: 'home' },
+    { title: 'Contatos', url: '/contacts', icon: 'chatbubbles' },
+    { title: 'Sobre', url: '/about', icon: 'information-circle' }
   ];
-  public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
-  constructor() {}
+
+  public appUser = {
+    logged: false,
+    title: 'Login / Entrar',
+    url: '/login',
+    icon: 'log-in',
+    avatar: ''
+  }
+
+  private authState$ = authState(this.auth);
+  private authStateSubscription = new Subscription;
+
+  constructor(
+    private auth: Auth = inject(Auth)
+  ) { }
+
+  ngOnInit() {
+    this.authStateSubscription = this.authState$.subscribe(
+      (userData: User | null) => {
+        if (userData) {
+         this.appUser = {
+            logged: true,
+            title: userData.displayName + '',
+            url: '/profile',
+            icon: 'log-out',
+            avatar: userData.photoURL + ''
+          }
+        }
+      }
+    )
+  }
+
 }
