@@ -3,7 +3,8 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>Login / Entrar</ion-title>
+    <ion-title class="ion-text-center">Login / Entrar</ion-title>
+    <ion-icon name="log-in" class="ion-margin" size="large" slot="end"></ion-icon>
   </ion-toolbar>
 </ion-header>
 
@@ -18,7 +19,7 @@
 
     <p>Logue-se para ter acesso ao nosso conteúdo restrito.</p>
     <p class="ion-text-center">
-      <ion-button (click)="login()">
+      <ion-button (click)="login()" expand="block">
         <ion-icon slot="start" name="logo-google"></ion-icon>
         Logue-se pelo Google
       </ion-button>
