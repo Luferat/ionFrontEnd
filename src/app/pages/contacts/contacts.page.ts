@@ -26,10 +26,12 @@ export class ContactsPage implements OnInit {
       email: 'Digite um email válido.'
     },
     subject: {
-      required: 'O assunto é obrigatório.'
+      required: 'O assunto é obrigatório.',
+      minlength: 'O assunto está muito curto.'
     },
     message: {
-      required: 'A mensagem é obrigatória.'
+      required: 'A mensagem é obrigatória.',
+      minlength: 'A mensagem está muito curta.'
     }
   }
 
