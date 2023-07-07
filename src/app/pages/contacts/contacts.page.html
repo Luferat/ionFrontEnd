@@ -14,4 +14,55 @@
       <ion-title size="large">Faça Contato</ion-title>
     </ion-toolbar>
   </ion-header>
+
+  <div class="ion-padding">
+
+    <form *ngIf="!success" [formGroup]="contactForm" (ngSubmit)="sendContact()">
+
+      <p>Preencha todos os campos abaixo para entrar em contato com a equipe do site <em>{{ env.appName }}</em>.</p>
+
+      <p>
+        <ion-input type="text" label="Nome:" label-placement="floating" fill="outline" placeholder="Seu nome"
+          formControlName="name" required minlength="3"></ion-input>
+        <small class="error-message" *ngIf="formErrors.name">{{ formErrors.name }}</small>
+      </p>
+
+      <p>
+        <ion-input type="email" label="E-mail:" label-placement="floating" fill="outline" placeholder="Seu email"
+          formControlName="email" required email></ion-input>
+        <small class="error-message" *ngIf="formErrors.email">{{ formErrors.email }}</small>
+      </p>
+
+      <p>
+        <ion-input type="text" label="Assunto:" label-placement="floating" fill="outline"
+          placeholder="Assunto do contato"
+          formControlName="subject" required minlength="3"></ion-input>
+        <small class="error-message" *ngIf="formErrors.subject">{{ formErrors.subject }}</small>
+      </p>
+
+      <p>
+        <ion-textarea label="Mensagem:" label-placement="floating" fill="outline" placeholder="Mensagem do contato"
+          formControlName="message" required minlength="5" [autoGrow]="true"></ion-textarea>
+        <small class="error-message" *ngIf="formErrors.message">{{ formErrors.message }}</small>
+      </p>
+
+      <p>
+        <ion-button type="submit" [disabled]="contactForm.invalid">Enviar</ion-button>
+      </p>
+
+    </form>
+
+    <div *ngIf="success">
+
+      <h3>Olá {{firstName}}!</h3>
+      <p>Seu contato foi enviado.</p>
+      <p><em>Obrigado...</em></p>
+      <p class="ion-text-center">
+        <ion-button (click)="reset()">Enviar outro contato</ion-button>
+      </p>
+
+    </div>
+
+  </div>
+
 </ion-content>
