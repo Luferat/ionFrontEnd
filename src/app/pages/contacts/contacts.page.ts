@@ -10,7 +10,7 @@ import { environment } from 'src/environments/environment';
 })
 export class ContactsPage implements OnInit {
 
-  env = environment;
+  env: any = environment;
   contactForm!: FormGroup;
   contact!: any;
   success: boolean = false;
@@ -51,7 +51,6 @@ export class ContactsPage implements OnInit {
   ngOnInit(): void {
     this.createForm();
     this.success = false;
-
     this.contactForm.valueChanges.subscribe(() => {
       this.updateValidationMessages();
     });
@@ -69,9 +68,7 @@ export class ContactsPage implements OnInit {
   updateValidationMessages() {
     for (const field in this.formErrors) {
       if (Object.prototype.hasOwnProperty.call(this.formErrors, field)) {
-
         this.formErrors[field] = '';
-
         const control = this.contactForm.get(field);
         if (control && control.dirty && !control.valid) {
           const messages = this.validationMessages[field];
@@ -86,21 +83,15 @@ export class ContactsPage implements OnInit {
   }
 
   sendContact() {
-
-    if (this.contactForm.invalid) {
-      return;
-    }
-
+    if (this.contactForm.invalid) return;
     this.contact = this.contactForm.value;
     this.contact.date = new Date();
     this.contact.status = 'sended';
-
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })
     };
-
     this.http.post(environment.apiURL + '/contacts', this.contact, httpOptions)
       .subscribe(
         (data) => {
@@ -111,9 +102,7 @@ export class ContactsPage implements OnInit {
           alert('Oooops!\n' + error.message);
         }
       );
-
     this.contactForm.reset();
-
   }
 
   reset() {
