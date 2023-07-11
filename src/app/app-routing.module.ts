@@ -58,10 +58,16 @@ const routes: Routes = [
     data: { authGuardPipe: toLogin }
   },
   {
+    path: 'view/:id',
+    title: `${env.appName} - Artigo Completo`,
+    loadChildren: () => import('./pages/view/view.module').then(m => m.ViewPageModule)
+  },
+  {
     path: '**',
     redirectTo: '404',
     pathMatch: 'full'
   }
+
 ];
 
 @NgModule({

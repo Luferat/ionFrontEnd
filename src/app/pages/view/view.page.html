@@ -1,0 +1,53 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center">Artigo</ion-title>
+    <ion-icon name="home" slot="end" size="large" class="ion-margin"></ion-icon>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <article *ngIf="article">
+    <h3>{{ article.atitle }}</h3>
+    <p><small>
+        Por {{ article.aauthor.uname }}.<br>
+        Em {{ article.adate | date: 'dd/MM/yyyy' }} às {{ article.adate | date: 'HH:mm'}}.
+      </small></p>
+    <div>{{ article.acontent }}</div>
+
+  </article>
+
+  <aside *ngIf="author">
+
+    <ion-card class="ion-no-margin ion-margin-bottom">
+      <ion-img [alt]="author.uname" [src]="author.uphoto"></ion-img>
+      <ion-card-header>
+        <ion-card-title>{{ author.uname }}</ion-card-title>
+        <ion-card-subtitle>{{ author.ubio }}</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <ul class="ion-no-margin">
+          <li><strong>Idade: </strong>{{ author.age }} anos</li>
+          <li><strong>Na equipe desde: </strong>{{ author.udate | date: 'dd/MM/yyyy' }}</li>
+        </ul>
+        <ion-grid *ngIf="socials">
+          <ion-row>
+            <ion-col *ngFor="let social of socials" class="ion-text-center">
+              <a [href]="social.link" target="_blank">{{ social.name }}</a>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-list *ngIf="authorArticles">
+fdslkfosdhfojsdjf
+lsdkafsadjfçj
+    </ion-list>
+
+  </aside>
+
+</ion-content>
