@@ -45,7 +45,7 @@
       </ion-list-header>
       <ion-item *ngFor="let comment of lastComments">
         <ion-avatar slot="start">
-          <img [alt]="comment.fbname" [src]="comment.fbphoto">
+          <img [alt]="comment.fbname" [src]="comment.fbphoto" [title]="comment.fbname">
         </ion-avatar>
         <ion-label><a routerLink="/view/{{ comment.carticle.aid }}">{{ comment.ccomment }}</a></ion-label>
       </ion-item>

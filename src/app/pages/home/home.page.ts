@@ -40,7 +40,7 @@ export class HomePage implements OnInit {
 
   getLastComments(limit: number) {
     this.http.get(environment.apiURL + '/comments/last/' + limit).subscribe((response) => {
-      console.log('Comentátios recentes:', response);
+      console.log('Comentários recentes:', response);
       this.lastComments = response;
     })
   }

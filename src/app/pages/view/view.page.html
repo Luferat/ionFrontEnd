@@ -44,8 +44,18 @@
     </ion-card>
 
     <ion-list *ngIf="authorArticles">
-fdslkfosdhfojsdjf
-lsdkafsadjfçj
+
+      <ion-list-header>
+        <ion-label>Mais Artigos de {{ author.uname }}</ion-label>
+      </ion-list-header>
+
+      <ion-item *ngFor="let article of authorArticles">
+        <ion-thumbnail slot="start">
+          <img [alt]="article.atitle" [src]="article.athumbnail">
+        </ion-thumbnail>
+        <ion-label><a routerLink="/view/{{ article.aid }}">{{ article.atitle }}</a></ion-label>
+      </ion-item>
+
     </ion-list>
 
   </aside>

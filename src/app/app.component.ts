@@ -26,7 +26,7 @@ export class AppComponent {
     avatar: ''
   }
 
-  private authState$ = authState(this.auth);
+  private authState = authState(this.auth);
   private authStateSubscription = new Subscription;
 
   constructor(
@@ -34,7 +34,7 @@ export class AppComponent {
   ) { }
 
   ngOnInit() {
-    this.authStateSubscription = this.authState$.subscribe(
+    this.authStateSubscription = this.authState.subscribe(
       (userData: User | null) => {
         if (userData) {
          this.appUser = {

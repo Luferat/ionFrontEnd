@@ -1,6 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
+import { Auth, User, authState } from '@angular/fire/auth';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -15,6 +17,10 @@ export class ContactsPage implements OnInit {
   contact!: any;
   success: boolean = false;
   firstName: String = "Visitante";
+
+  // Conecta o Authentication.
+  private authState = authState(this.auth);
+  private authStateSubscription = new Subscription;
 
   validationMessages: any = {
     name: {
@@ -44,16 +50,29 @@ export class ContactsPage implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private http: HttpClient
+    private http: HttpClient,
+    private auth: Auth = inject(Auth)
   ) {
   }
 
   ngOnInit(): void {
     this.createForm();
     this.success = false;
+
+    // Quando o formulário for editado, executa 'updateValidationMessages()'.
     this.contactForm.valueChanges.subscribe(() => {
       this.updateValidationMessages();
     });
+
+    // Se usuário está logado, preenche os campos 'name' e 'email'.
+    this.authStateSubscription = this.authState.subscribe(
+      (userData: User | null) => {
+        if (userData) {
+          this.contactForm.controls['name'].setValue(userData.displayName);
+          this.contactForm.controls['email'].setValue(userData.email);
+        }
+      }
+    );
   }
 
   createForm() {
@@ -65,6 +84,7 @@ export class ContactsPage implements OnInit {
     });
   }
 
+  // Valida o preenchimento dos campos do formulário em tempo real.
   updateValidationMessages() {
     for (const field in this.formErrors) {
       if (Object.prototype.hasOwnProperty.call(this.formErrors, field)) {
@@ -88,20 +108,17 @@ export class ContactsPage implements OnInit {
     this.contact.date = new Date();
     this.contact.status = 'sended';
     const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json'
-      })
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
     };
-    this.http.post(environment.apiURL + '/contacts', this.contact, httpOptions)
-      .subscribe(
-        (data) => {
-          this.firstName = this.contact.name.split(' ')[0];
-          this.success = true;
-        },
-        (error) => {
-          alert('Oooops!\n' + error.message);
-        }
-      );
+    this.http.post(environment.apiURL + '/contacts', this.contact, httpOptions).subscribe((response) => {
+      console.log('Response do contato enviado:', response);
+      this.firstName = this.contact.name.split(' ')[0];
+      this.success = true;
+    },
+      (error) => {
+        alert('Oooops!\n' + error.message);
+      }
+    );
     this.contactForm.reset();
   }
 

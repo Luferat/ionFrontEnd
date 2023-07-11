@@ -44,13 +44,6 @@ const routes: Routes = [
     data: { authGuardPipe: toHome }
   },
   {
-    path: 'logout',
-    title: `${env.appName} - Logout / Sair`,
-    loadChildren: () => import('./user/logout/logout.module').then(m => m.LogoutPageModule),
-    canActivate: [AuthGuard],
-    data: { authGuardPipe: toLogin }
-  },
-  {
     path: 'profile',
     title: `${env.appName} - Perfil de Usuário`,
     loadChildren: () => import('./user/profile/profile.module').then(m => m.ProfilePageModule),

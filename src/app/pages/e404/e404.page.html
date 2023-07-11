@@ -7,21 +7,12 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Erro 404</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding">
 
-  <div class="ion-padding">
-
-    <h2>Oooops!</h2>
-    <ion-img src="assets/404.jpg"></ion-img>
-    <p>O conteúdo que você está tentando acessar não existe.</p>
-    <p>Use o menu de navegação para acessar outras páginas e conteúdos do <em>{{ env.appName }}</em>.</p>
-    <p><em>Obrigado...</em></p>
-
-  </div>
+  <ion-img src="assets/404.jpg" alt="Erro 404"></ion-img>
+  <h2>Oooops!</h2>
+  <p>O conteúdo que você está tentando acessar não existe.</p>
+  <p>Use o menu de navegação para acessar outras páginas e conteúdos do <em>{{ env.appName }}</em>.</p>
+  <p><em>Obrigado...</em></p>
 
 </ion-content>
