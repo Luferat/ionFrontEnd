@@ -56,6 +56,16 @@ const routes: Routes = [
     loadChildren: () => import('./pages/view/view.module').then(m => m.ViewPageModule)
   },
   {
+    path: 'search/:query',
+    title: `${env.appName} - Procurar Artigo`,
+    loadChildren: () => import('./pages/search/search.module').then(m => m.SearchPageModule)
+  },
+  {
+    path: 'policies',
+    title: `${env.appName} - Sua Privacidade`,
+    loadChildren: () => import('./pages/policies/policies.module').then( m => m.PoliciesPageModule)
+  },
+  {
     path: '**',
     redirectTo: '404',
     pathMatch: 'full'

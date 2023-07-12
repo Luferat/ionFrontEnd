@@ -1,0 +1,47 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center">Sua Privacidade</ion-title>
+    <ion-icon name="document-lock" size="large" class="ion-margin" slot="end"></ion-icon>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <ion-label><em>O {{ env.appName }} valoriza a privacidade dos usuários. Abaixo, explicamos como tratamos as
+      informações coletadas.</em></ion-label>
+
+  <h3>Coleta de Informações</h3>
+  <p>Usamos login social fornecido pelo provedor federado Google. Não armazenamos informações sensíveis dos usuários.
+    A únicas informações coletadas são "nome social", "endereço de e-mail" e "foto de perfil" fornecidos pelo Google
+    durante a autenticação, após sua autorização.</p>
+
+  <h3>Uso das Informações</h3>
+  <p>Utilizamos os dados fornecidos pelo Google para autenticar os usuários e permitir o acesso às funcionalidades do
+    site, como deixar comentários nos artigos.</p>
+
+  <h3>Compartilhamento de Informações</h3>
+  <p>Não compartilhamos as informações dos usuários com terceiros. Todas as informações são mantidas em sigilo e são
+    utilizadas exclusivamente para o funcionamento do site.</p>
+
+  <h3>Cookies</h3>
+  <p>O site utiliza cookies para melhorar a experiência dos usuários. Esses cookies não contêm informações pessoais e
+    podem ser desativados nas configurações do navegador.</p>
+
+  <h3>Alterações na Política de Privacidade</h3>
+  <p>Podemos atualizar esta política de privacidade periodicamente. As alterações serão publicadas nesta página.</p>
+
+  <h3>Contato</h3>
+  <p>Se você tiver alguma dúvida sobre nossa política de privacidade, <a routerLink="/contacts">entre em contato
+      conosco</a>.</p>
+
+  <h3>Publicação e Validade</h3>
+  <ul>
+    <li>Versão 1.0</li>
+    <li>Publicada em 11/07/2023</li>
+    <li>Válida até 11/07/2033</li>
+  </ul>
+
+</ion-content>

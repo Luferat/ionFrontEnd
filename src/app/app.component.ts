@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { Auth, User, authState } from '@angular/fire/auth';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
@@ -15,7 +16,8 @@ export class AppComponent {
   public appPages = [
     { title: 'Início', url: '/home', icon: 'home' },
     { title: 'Contatos', url: '/contacts', icon: 'chatbubbles' },
-    { title: 'Sobre', url: '/about', icon: 'information-circle' }
+    { title: 'Sobre', url: '/about', icon: 'information-circle' },
+    { title: 'Sua Privacidade', url: '/policies', icon: 'document-lock' }
   ];
 
   public appUser = {
@@ -30,14 +32,15 @@ export class AppComponent {
   private authStateSubscription = new Subscription;
 
   constructor(
-    private auth: Auth = inject(Auth)
+    private auth: Auth = inject(Auth),
+    private router: Router
   ) { }
 
   ngOnInit() {
     this.authStateSubscription = this.authState.subscribe(
       (userData: User | null) => {
         if (userData) {
-         this.appUser = {
+          this.appUser = {
             logged: true,
             title: userData.displayName + '',
             url: '/profile',
@@ -47,6 +50,12 @@ export class AppComponent {
         }
       }
     )
+  }
+
+  searchEvent(event: any) {
+    let query = event.target.value.trim();
+    if (query !== '') this.router.navigate(['/search/' + query]);
+    return false;
   }
 
 }

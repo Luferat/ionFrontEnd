@@ -6,6 +6,8 @@
           <ion-list-header>{{ env.appName }}</ion-list-header>
           <ion-note>{{ env.appSlogan }}</ion-note>
 
+          <ion-searchbar (ionChange)="searchEvent($event)" placeholder="Procurar" class="ion-margin-bottom"></ion-searchbar>
+
           <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
             <ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false"
               routerLinkActive="selected">
@@ -33,8 +35,8 @@
             </ion-item>
           </ion-menu-toggle>
 
-        </ion-list>
-
+        </ion-list>        
+        
       </ion-content>
 
       <ion-label class="ion-padding ion-text-center"><small>&copy; 2023 Eu Mesmo!</small></ion-label>
